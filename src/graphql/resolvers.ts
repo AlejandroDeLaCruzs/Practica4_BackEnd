@@ -35,24 +35,25 @@ export const resolvers: IResolvers = {
 
       return {
         _id: user._id.toString(),
+        name: user.name,
         email: user.email,
       };
     },
   },
 
   Mutation: {
-    addPost: async (_, { name, contenido, date }, { user }) => {
+    addPost: async (_, { titulo, contenido, date }, { user }) => {
       requireAuth(user);
       const db = getDB();
       const result = await db.collection(nameCollection).insertOne({
-        name,
+        titulo,
         contenido,
         date,
         autor: user._id.toString()
       });
       return {
         _id: result.insertedId,
-        name,
+        titulo,
         contenido,
         date,
       };
@@ -70,11 +71,13 @@ export const resolvers: IResolvers = {
       requireAuth(user);
       await checkOwnership(id, user._id);
       const db = getDB();
-      return db.collection(nameCollection).updateOne(
+      await db.collection(nameCollection).updateOne(
         { _id: new ObjectId(id) },
         { $set: { titulo, contenido, date } }
 
       )
+     return getDB().collection(nameCollection).findOne({ _id: new ObjectId(id) });
+
     },
 
     register: async (
