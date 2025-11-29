@@ -1,4 +1,3 @@
-import { get } from "http";
 import { getDB } from "../db/db"
 import bcrypt from "bcryptjs";
 

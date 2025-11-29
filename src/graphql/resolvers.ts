@@ -4,7 +4,7 @@ import { IResolvers } from "@graphql-tools/utils";
 import { login, registerUser } from "../collections/userspost";
 import { signToken } from "../auth";
 import { requireAuth, checkOwnership } from "../utils/utils"
-import { get } from "http";
+
 
 
 const nameCollection = "Posts";
