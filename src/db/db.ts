@@ -21,12 +21,3 @@ export const connectToMongoDB = async () => {
 };
 
 export const getDB = ():Db => dB;
-
-
-/*export const closeMongoDB = async () => {
-    try{
-        client && await client.close();
-    } catch(err){
-        console.log("Error cerrando el mongo: ", err)
-    }
-}*/
